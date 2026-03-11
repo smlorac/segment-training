@@ -48,21 +48,39 @@
         </form>
     </div>
 
-    <script>
-        document.getElementById('userForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const userData = {
-                name: formData.get('name'),
-                age: formData.get('age'),
-                preference: formData.get('animal')
-            };
+<script type="text/javascript">
+  // We attach the listener to the form ID
+  const form = document.getElementById('userForm');
 
-            console.log('Form Data Captured:', userData);
-            alert('Data logged to console! Next step: Add the Segment snippet.');
-        });
-    </script>
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // 1. Extract values from your form fields
+    var fullname = this["name"].value;
+    var age = this["age"].value;
+    var animal = this["animal"].value; // This gets the selected radio value
+
+    // 2. Identify the user 
+    // We'll use a placeholder ID 'user_01' for testing
+    analytics.identify('1234', {
+      name: fullname,
+      age: age,
+      favorite_animal: animal // This saves the preference to the user profile
+    });
+
+    // 3. Track the action
+    // We pass the animal preference as a property of the event
+    analytics.track('Form Submitted', {
+      full_name: fullname,
+      age: age,
+      preferred_pet: animal
+    }, function() {
+      // Optional: Refresh or redirect after the event is sent
+      console.log('Segment calls sent successfully!');
+      alert('Check your Segment Debugger!');
+    });
+  });
+</script>
 
 </body>
 </html>
