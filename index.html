@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segment Training Sandbox</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <h2>User Identification</h2>
+        <p class="description">
+            Fill this out to test your Segment <code>identify()</code> and <code>track()</code> calls.
+        </p>
+
+        <form id="userForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" placeholder="25" required>
+            </div>
+
+            <div class="form-group">
+                <label>Preference</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="animal" value="cats" checked> Cats
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="animal" value="dogs"> Dogs
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit">Submit Data</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const userData = {
+                name: formData.get('name'),
+                age: formData.get('age'),
+                preference: formData.get('animal')
+            };
+
+            console.log('Form Data Captured:', userData);
+            alert('Data logged to console! Next step: Add the Segment snippet.');
+        });
+    </script>
+
+</body>
+</html>
